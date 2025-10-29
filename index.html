@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Grammar Quiz - EMRS Express Batch</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            position: relative;
+        }
+        
+        .creator {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 0.9rem;
+            color: #764ba2;
+            font-weight: bold;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            color: #764ba2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .topics {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .topic-tag {
+            background: #f0f4ff;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #667eea;
+            border: 1px solid #d1dcff;
+        }
+        
+        .timer-container {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+        }
+        
+        .timer {
+            background: #ff6b6b;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .quiz-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .question-number {
+            font-size: 1.2rem;
+            color: #764ba2;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            font-weight: 600;
+            color: #5a4fcf;
+            line-height: 1.4;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .option {
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+        
+        .option:hover {
+            background: #e9ecef;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .option.selected {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+        
+        .option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        
+        .option.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        button {
+            padding: 12px 25px;
+            background: #764ba2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        button:hover {
+            background: #5a4fcf;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .result-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+        
+        .result-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #764ba2;
+            margin-bottom: 20px;
+        }
+        
+        .score {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background: #f8f9fa;
+        }
+        
+        .wrong-questions {
+            margin-top: 20px;
+        }
+        
+        .wrong-question {
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            background: #f8f9fa;
+            border-left: 5px solid #dc3545;
+        }
+        
+        .announcement {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        
+        .announcement-title {
+            font-size: 1.8rem;
+            color: #b8860b;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .announcement-content {
+            text-align: left;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .highlight {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .social-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #764ba2;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        
+        .social-link:hover {
+            background: #5a4fcf;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .screenshot-btn {
+            background: #28a745;
+            margin-top: 15px;
+        }
+        
+        .screenshot-btn:hover {
+            background: #218838;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .option {
+                padding: 12px 15px;
+                font-size: 1rem;
+            }
+            
+            .announcement-title {
+                font-size: 1.5rem;
+            }
+            
+            .creator {
+                position: static;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="creator">Created by Anurag</div>
+            <h1>🏆 English Grammar Quiz 🏆</h1>
+            <p class="subtitle">Test your knowledge of English Grammar</p>
+            <div class="topics">
+                <span class="topic-tag">Verb</span>
+                <span class="topic-tag">Tenses</span>
+                <span class="topic-tag">Voice</span>
+                <span class="topic-tag">Subject-Verb Agreement</span>
+                <span class="topic-tag">Articles</span>
+                <span class="topic-tag">Comprehension</span>
+                <span class="topic-tag">Fill in the Blanks</span>
+                <span class="topic-tag">Adverb</span>
+                <span class="topic-tag">Error Correction</span>
+                <span class="topic-tag">Sentence Rearrangement</span>
+                <span class="topic-tag">Unseen Passages</span>
+                <span class="topic-tag">Vocabulary</span>
+                <span class="topic-tag">Antonyms/Synonyms</span>
+                <span class="topic-tag">Grammar</span>
+                <span class="topic-tag">Idioms & Phrases</span>
+            </div>
+            <div class="timer-container">
+                <div class="timer" id="timer">30</div>
+            </div>
+        </header>
+        
+        <div class="announcement">
+            <h2 class="announcement-title">🏆 EMRS PRLIMS 50 DAYS EXPRESS BATCH ANNOUNCEMENT 🏆</h2>
+            <div class="announcement-content">
+                <p><strong>EMRS Prelims 50 Days Express Batch Announcement</strong></p>
+                <p><strong>Dear EMRS Aspirants,</strong></p>
+                <p>We're launching a special <span class="highlight">EXPRESS BATCH</span> for EMRS Prelims 2024. This batch will help you score <span class="highlight">70+ marks</span> in just 50 days!</p>
+                <p><strong>🎯 Batch Highlights:</strong></p>
+                <ul>
+                    <li>Comprehensive Coverage of All Subjects</li>
+                    <li>Daily Practice with Instant Solutions</li>
+                    <li>Previous Year CTET Questions Analysis</li>
+                    <li>Time-Bound Preparation Strategy</li>
+                </ul>
+                <p><strong>💰 Special Launch Offer:</strong> Only ₹99</p>
+                <p><strong>👥 Limited To:</strong> First 100 Students</p>
+            </div>
+            <div class="social-links">
+                <a href="https://allteachingexamprep.github.io/80ctQuiz/" class="social-link">Demo Link</a>
+                <a href="https://t.me/LtGradeGS2025" class="social-link">Join Telegram</a>
+            </div>
+        </div>
+        
+        <div class="quiz-section" id="quiz-section">
+            <div class="question-number" id="question-number">Question 1/10</div>
+            <div class="question-text" id="question-text">Choose the correct form of the verb: She _____ to the market every day.</div>
+            <div class="options" id="options">
+                <div class="option" data-correct="false">(a) go</div>
+                <div class="option" data-correct="true">(b) goes</div>
+                <div class="option" data-correct="false">(c) going</div>
+                <div class="option" data-correct="false">(d) gone</div>
+            </div>
+            <div class="navigation">
+                <button id="prev-btn" disabled>Previous Question</button>
+                <button id="next-btn">Next Question</button>
+            </div>
+        </div>
+        
+        <div class="result-section" id="result-section">
+            <h2 class="result-title">Your Result</h2>
+            <div class="score" id="score">You scored 7/10 correctly!</div>
+            <div class="wrong-questions" id="wrong-questions">
+                <h3>Questions with incorrect answers:</h3>
+                <!-- Wrong questions will be inserted here by JavaScript -->
+            </div>
+            <div class="social-links">
+                <button class="social-link screenshot-btn" id="screenshot-btn">Take Screenshot</button>
+                <a href="#" class="social-link" id="restart-btn">Try Again</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Questions data
+        const questions = [
+            {
+                question: "Choose the correct form of the verb: She _____ to the market every day.",
+                options: [
+                    { text: "(a) go", correct: false },
+                    { text: "(b) goes", correct: true },
+                    { text: "(c) going", correct: false },
+                    { text: "(d) gone", correct: false }
+                ]
+            },
+            {
+                question: "Identify the correct tense: I have been working here since 2010.",
+                options: [
+                    { text: "(a) Present Perfect", correct: false },
+                    { text: "(b) Present Perfect Continuous", correct: true },
+                    { text: "(c) Past Perfect", correct: false },
+                    { text: "(d) Simple Present", correct: false }
+                ]
+            },
+            {
+                question: "Change the voice: The teacher praised the student.",
+                options: [
+                    { text: "(a) The student was praised by the teacher.", correct: true },
+                    { text: "(b) The student is praised by the teacher.", correct: false },
+                    { text: "(c) The student praised the teacher.", correct: false },
+                    { text: "(d) The student had been praised by the teacher.", correct: false }
+                ]
+            },
+            {
+                question: "Choose the correct subject-verb agreement: Neither the teacher nor the students _____ present.",
+                options: [
+                    { text: "(a) was", correct: false },
+                    { text: "(b) were", correct: true },
+                    { text: "(c) has been", correct: false },
+                    { text: "(d) is", correct: false }
+                ]
+            },
+            {
+                question: "Fill in the blank with correct article: He is _____ honest man.",
+                options: [
+                    { text: "(a) a", correct: false },
+                    { text: "(b) an", correct: true },
+                    { text: "(c) the", correct: false },
+                    { text: "(d) no article", correct: false }
+                ]
+            },
+            {
+                question: "Identify the adverb in the sentence: She sings beautifully.",
+                options: [
+                    { text: "(a) She", correct: false },
+                    { text: "(b) sings", correct: false },
+                    { text: "(c) beautifully", correct: true },
+                    { text: "(d) None of these", correct: false }
+                ]
+            },
+            {
+                question: "Correct the error: One of the boys are missing.",
+                options: [
+                    { text: "(a) One of the boy are missing.", correct: false },
+                    { text: "(b) One of the boys is missing.", correct: true },
+                    { text: "(c) One of the boys were missing.", correct: false },
+                    { text: "(d) One of boys is missing.", correct: false }
+                ]
+            },
+            {
+                question: "Rearrange the words: never / he / late / is / work / for",
+                options: [
+                    { text: "(a) He is never late for work.", correct: true },
+                    { text: "(b) He never is late for work.", correct: false },
+                    { text: "(c) Never he is late for work.", correct: false },
+                    { text: "(d) For work he is never late.", correct: false }
+                ]
+            },
+            {
+                question: "Choose the synonym of 'Benevolent'",
+                options: [
+                    { text: "(a) Kind", correct: true },
+                    { text: "(b) Cruel", correct: false },
+                    { text: "(c) Selfish", correct: false },
+                    { text: "(d) Greedy", correct: false }
+                ]
+            },
+            {
+                question: "What does the idiom 'Break the ice' mean?",
+                options: [
+                    { text: "(a) To start a conversation", correct: true },
+                    { text: "(b) To break something", correct: false },
+                    { text: "(c) To fall on ice", correct: false },
+                    { text: "(d) To make things difficult", correct: false }
+                ]
+            }
+        ];
+
+        // DOM elements
+        const quizSection = document.getElementById('quiz-section');
+        const resultSection = document.getElementById('result-section');
+        const questionNumber = document.getElementById('question-number');
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const scoreElement = document.getElementById('score');
+        const wrongQuestionsContainer = document.getElementById('wrong-questions');
+        const timerElement = document.getElementById('timer');
+        const screenshotBtn = document.getElementById('screenshot-btn');
+        const restartBtn = document.getElementById('restart-btn');
+
+        // Quiz state
+        let currentQuestion = 0;
+        let userAnswers = new Array(questions.length).fill(null);
+        let score = 0;
+        let timer;
+        let timeLeft = 30;
+
+        // Initialize quiz
+        function initQuiz() {
+            showQuestion();
+            startTimer();
+        }
+
+        // Show current question
+        function showQuestion() {
+            const question = questions[currentQuestion];
+            questionNumber.textContent = `Question ${currentQuestion + 1}/${questions.length}`;
+            questionText.textContent = question.question;
+            
+            optionsContainer.innerHTML = '';
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.classList.add('option');
+                optionElement.textContent = option.text;
+                optionElement.dataset.correct = option.correct;
+                
+                // Check if user has already selected this option
+                if (userAnswers[currentQuestion] === index) {
+                    optionElement.classList.add('selected');
+                    if (option.correct) {
+                        optionElement.classList.add('correct');
+                    } else {
+                        optionElement.classList.add('incorrect');
+                    }
+                }
+                
+                optionElement.addEventListener('click', () => selectOption(index));
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Update navigation buttons
+            prevBtn.disabled = currentQuestion === 0;
+            nextBtn.textContent = currentQuestion === questions.length - 1 ? 'View Results' : 'Next Question';
+            
+            // Reset timer for new question
+            resetTimer();
+        }
+
+        // Select an option
+        function selectOption(optionIndex) {
+            // Mark the selected option
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => option.classList.remove('selected', 'correct', 'incorrect'));
+            
+            const selectedOption = options[optionIndex];
+            selectedOption.classList.add('selected');
+            
+            // Check if the answer is correct
+            const isCorrect = questions[currentQuestion].options[optionIndex].correct;
+            if (isCorrect) {
+                selectedOption.classList.add('correct');
+            } else {
+                selectedOption.classList.add('incorrect');
+                
+                // Highlight the correct answer
+                options.forEach(option => {
+                    if (option.dataset.correct === 'true') {
+                        option.classList.add('correct');
+                    }
+                });
+            }
+            
+            // Store user's answer
+            userAnswers[currentQuestion] = optionIndex;
+            
+            // Automatically move to next question after a delay
+            clearTimeout(timer);
+            setTimeout(() => {
+                if (currentQuestion < questions.length - 1) {
+                    currentQuestion++;
+                    showQuestion();
+                } else {
+                    showResult();
+                }
+            }, 1500);
+        }
+
+        // Navigation
+        prevBtn.addEventListener('click', () => {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                showResult();
+            }
+        });
+
+        // Timer functions
+        function startTimer() {
+            resetTimer();
+            timer = setInterval(() => {
+                timeLeft--;
+                timerElement.textContent = timeLeft;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    // Auto move to next question when time runs out
+                    if (currentQuestion < questions.length - 1) {
+                        currentQuestion++;
+                        showQuestion();
+                    } else {
+                        showResult();
+                    }
+                }
+            }, 1000);
+        }
+
+        function resetTimer() {
+            clearInterval(timer);
+            timeLeft = 30;
+            timerElement.textContent = timeLeft;
+            startTimer();
+        }
+
+        // Show result
+        function showResult() {
+            clearInterval(timer);
+            quizSection.style.display = 'none';
+            resultSection.style.display = 'block';
+            
+            // Calculate score
+            score = 0;
+            const wrongQuestions = [];
+            
+            userAnswers.forEach((answer, index) => {
+                if (answer !== null && questions[index].options[answer].correct) {
+                    score++;
+                } else {
+                    wrongQuestions.push({
+                        question: questions[index].question,
+                        userAnswer: answer !== null ? questions[index].options[answer].text : 'No answer',
+                        correctAnswer: questions[index].options.find(option => option.correct).text
+                    });
+                }
+            });
+            
+            // Display score
+            scoreElement.textContent = `You scored ${score}/${questions.length} correctly!`;
+            
+            // Display wrong questions
+            if (wrongQuestions.length > 0) {
+                wrongQuestionsContainer.innerHTML = '<h3>Questions with incorrect answers:</h3>';
+                wrongQuestions.forEach((item, index) => {
+                    const wrongQuestionElement = document.createElement('div');
+                    wrongQuestionElement.classList.add('wrong-question');
+                    wrongQuestionElement.innerHTML = `
+                        <p><strong>Question ${index + 1}:</strong> ${item.question}</p>
+                        <p><strong>Your Answer:</strong> ${item.userAnswer}</p>
+                        <p><strong>Correct Answer:</strong> ${item.correctAnswer}</p>
+                    `;
+                    wrongQuestionsContainer.appendChild(wrongQuestionElement);
+                });
+            } else {
+                wrongQuestionsContainer.innerHTML = '<p>You answered all questions correctly! Congratulations! 🎉</p>';
+            }
+        }
+
+        // Screenshot functionality
+        screenshotBtn.addEventListener('click', () => {
+            alert('Use your device\'s screenshot function (like Win+Shift+S on Windows or Cmd+Shift+4 on Mac). Take a screenshot of this page so you can review the wrong questions later.');
+        });
+
+        // Restart quiz
+        restartBtn.addEventListener('click', () => {
+            currentQuestion = 0;
+            userAnswers = new Array(questions.length).fill(null);
+            score = 0;
+            quizSection.style.display = 'block';
+            resultSection.style.display = 'none';
+            initQuiz();
+        });
+
+        // Initialize the quiz
+        initQuiz();
+    </script>
+</body>
+</html>
