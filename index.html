@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English Grammar Quiz - EMRS Express Batch</title>
+    <title>Complete English Grammar Quiz - 100 Questions</title>
     <style>
         * {
             margin: 0;
@@ -80,6 +80,30 @@
             font-size: 0.85rem;
             color: #667eea;
             border: 1px solid #d1dcff;
+        }
+        
+        .progress-container {
+            width: 100%;
+            background: #e9ecef;
+            border-radius: 10px;
+            margin: 15px 0;
+            height: 20px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745, #20c997);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+        
+        .progress-text {
+            text-align: center;
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 10px;
         }
         
         .timer-container {
@@ -220,6 +244,8 @@
         
         .wrong-questions {
             margin-top: 20px;
+            max-height: 400px;
+            overflow-y: auto;
         }
         
         .wrong-question {
@@ -296,6 +322,13 @@
             background: #218838;
         }
         
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: white;
+            font-weight: bold;
+        }
+        
         @media (max-width: 768px) {
             h1 {
                 font-size: 1.8rem;
@@ -325,8 +358,8 @@
     <div class="container">
         <header>
             <div class="creator">Created by Anurag</div>
-            <h1>🏆 English Grammar Quiz 🏆</h1>
-            <p class="subtitle">Test your knowledge of English Grammar</p>
+            <h1>🏆 Complete English Grammar Quiz 🏆</h1>
+            <p class="subtitle">100 Questions - Test Your English Grammar Knowledge</p>
             <div class="topics">
                 <span class="topic-tag">Verb</span>
                 <span class="topic-tag">Tenses</span>
@@ -343,6 +376,10 @@
                 <span class="topic-tag">Antonyms/Synonyms</span>
                 <span class="topic-tag">Grammar</span>
                 <span class="topic-tag">Idioms & Phrases</span>
+            </div>
+            <div class="progress-text" id="progress-text">Question 1 of 100</div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
             </div>
             <div class="timer-container">
                 <div class="timer" id="timer">30</div>
@@ -372,7 +409,7 @@
         </div>
         
         <div class="quiz-section" id="quiz-section">
-            <div class="question-number" id="question-number">Question 1/10</div>
+            <div class="question-number" id="question-number">Question 1/100</div>
             <div class="question-text" id="question-text">Choose the correct form of the verb: She _____ to the market every day.</div>
             <div class="options" id="options">
                 <div class="option" data-correct="false">(a) go</div>
@@ -388,7 +425,7 @@
         
         <div class="result-section" id="result-section">
             <h2 class="result-title">Your Result</h2>
-            <div class="score" id="score">You scored 7/10 correctly!</div>
+            <div class="score" id="score">You scored 0/100 correctly!</div>
             <div class="wrong-questions" id="wrong-questions">
                 <h3>Questions with incorrect answers:</h3>
                 <!-- Wrong questions will be inserted here by JavaScript -->
@@ -398,11 +435,16 @@
                 <a href="#" class="social-link" id="restart-btn">Try Again</a>
             </div>
         </div>
+        
+        <footer>
+            <p>Created by Anurag</p>
+        </footer>
     </div>
 
     <script>
-        // Questions data
+        // Questions data - 100 English Grammar Questions
         const questions = [
+            // Verbs (10 questions)
             {
                 question: "Choose the correct form of the verb: She _____ to the market every day.",
                 options: [
@@ -413,6 +455,89 @@
                 ]
             },
             {
+                question: "Which form of the verb is used with 'I', 'we', 'you', 'they' in simple present tense?",
+                options: [
+                    { text: "(a) First form", correct: true },
+                    { text: "(b) Second form", correct: false },
+                    { text: "(c) Third form", correct: false },
+                    { text: "(d) ing form", correct: false }
+                ]
+            },
+            {
+                question: "Identify the transitive verb: She wrote a letter.",
+                options: [
+                    { text: "(a) She", correct: false },
+                    { text: "(b) wrote", correct: true },
+                    { text: "(c) a", correct: false },
+                    { text: "(d) letter", correct: false }
+                ]
+            },
+            {
+                question: "Choose the correct auxiliary verb: _____ you like some coffee?",
+                options: [
+                    { text: "(a) Do", correct: false },
+                    { text: "(b) Does", correct: false },
+                    { text: "(c) Would", correct: true },
+                    { text: "(d) Have", correct: false }
+                ]
+            },
+            {
+                question: "Which sentence uses a modal verb correctly?",
+                options: [
+                    { text: "(a) I can to swim.", correct: false },
+                    { text: "(b) She must studies hard.", correct: false },
+                    { text: "(c) They should help the poor.", correct: true },
+                    { text: "(d) We might goes tomorrow.", correct: false }
+                ]
+            },
+            {
+                question: "Identify the irregular verb:",
+                options: [
+                    { text: "(a) walk", correct: false },
+                    { text: "(b) talk", correct: false },
+                    { text: "(c) sing", correct: true },
+                    { text: "(d) work", correct: false }
+                ]
+            },
+            {
+                question: "Choose the correct past participle: The book was _____ by him.",
+                options: [
+                    { text: "(a) write", correct: false },
+                    { text: "(b) wrote", correct: false },
+                    { text: "(c) written", correct: true },
+                    { text: "(d) writing", correct: false }
+                ]
+            },
+            {
+                question: "Which sentence uses a phrasal verb?",
+                options: [
+                    { text: "(a) She looks beautiful.", correct: false },
+                    { text: "(b) He gave up smoking.", correct: true },
+                    { text: "(c) They are students.", correct: false },
+                    { text: "(d) I have a car.", correct: false }
+                ]
+            },
+            {
+                question: "Identify the finite verb: Running fast, he caught the bus.",
+                options: [
+                    { text: "(a) Running", correct: false },
+                    { text: "(b) fast", correct: false },
+                    { text: "(c) caught", correct: true },
+                    { text: "(d) bus", correct: false }
+                ]
+            },
+            {
+                question: "Choose the correct verb form: Neither of the boys _____ done his homework.",
+                options: [
+                    { text: "(a) have", correct: false },
+                    { text: "(b) has", correct: true },
+                    { text: "(c) are", correct: false },
+                    { text: "(d) were", correct: false }
+                ]
+            },
+            
+            // Tenses (10 questions)
+            {
                 question: "Identify the correct tense: I have been working here since 2010.",
                 options: [
                     { text: "(a) Present Perfect", correct: false },
@@ -421,6 +546,89 @@
                     { text: "(d) Simple Present", correct: false }
                 ]
             },
+            {
+                question: "Choose the correct future tense: They _____ for London next week.",
+                options: [
+                    { text: "(a) leave", correct: false },
+                    { text: "(b) leaves", correct: false },
+                    { text: "(c) will leave", correct: true },
+                    { text: "(d) leaving", correct: false }
+                ]
+            },
+            {
+                question: "Which sentence is in past perfect tense?",
+                options: [
+                    { text: "(a) She had finished her work before I arrived.", correct: true },
+                    { text: "(b) She has finished her work.", correct: false },
+                    { text: "(c) She finishes her work.", correct: false },
+                    { text: "(d) She will finish her work.", correct: false }
+                ]
+            },
+            {
+                question: "Identify the tense: I will have completed my course by next year.",
+                options: [
+                    { text: "(a) Future Perfect", correct: true },
+                    { text: "(b) Future Continuous", correct: false },
+                    { text: "(c) Simple Future", correct: false },
+                    { text: "(d) Present Perfect", correct: false }
+                ]
+            },
+            {
+                question: "Choose the correct past continuous form: While I _____ dinner, the phone rang.",
+                options: [
+                    { text: "(a) was having", correct: true },
+                    { text: "(b) had", correct: false },
+                    { text: "(c) have", correct: false },
+                    { text: "(d) am having", correct: false }
+                ]
+            },
+            {
+                question: "Which sentence uses present perfect tense correctly?",
+                options: [
+                    { text: "(a) I have seen that movie yesterday.", correct: false },
+                    { text: "(b) I saw that movie yesterday.", correct: false },
+                    { text: "(c) I have seen that movie.", correct: true },
+                    { text: "(d) I see that movie.", correct: false }
+                ]
+            },
+            {
+                question: "Identify the tense: She had been waiting for two hours when he arrived.",
+                options: [
+                    { text: "(a) Past Perfect Continuous", correct: true },
+                    { text: "(b) Past Perfect", correct: false },
+                    { text: "(c) Past Continuous", correct: false },
+                    { text: "(d) Present Perfect Continuous", correct: false }
+                ]
+            },
+            {
+                question: "Choose the correct form: I _____ to the library every Sunday.",
+                options: [
+                    { text: "(a) go", correct: true },
+                    { text: "(b) goes", correct: false },
+                    { text: "(c) am going", correct: false },
+                    { text: "(d) have gone", correct: false }
+                ]
+            },
+            {
+                question: "Which sentence is in present continuous tense?",
+                options: [
+                    { text: "(a) She writes letters.", correct: false },
+                    { text: "(b) She is writing a letter.", correct: true },
+                    { text: "(c) She wrote a letter.", correct: false },
+                    { text: "(d) She has written a letter.", correct: false }
+                ]
+            },
+            {
+                question: "Identify the tense: They will be watching TV at 8 pm.",
+                options: [
+                    { text: "(a) Future Continuous", correct: true },
+                    { text: "(b) Simple Future", correct: false },
+                    { text: "(c) Future Perfect", correct: false },
+                    { text: "(d) Present Continuous", correct: false }
+                ]
+            },
+            
+            // Voice (10 questions)
             {
                 question: "Change the voice: The teacher praised the student.",
                 options: [
@@ -431,6 +639,89 @@
                 ]
             },
             {
+                question: "Identify the passive voice:",
+                options: [
+                    { text: "(a) She cooks food.", correct: false },
+                    { text: "(b) Food is cooked by her.", correct: true },
+                    { text: "(c) She is cooking food.", correct: false },
+                    { text: "(d) She has cooked food.", correct: false }
+                ]
+            },
+            {
+                question: "Change to active voice: The letter was written by John.",
+                options: [
+                    { text: "(a) John writes the letter.", correct: false },
+                    { text: "(b) John wrote the letter.", correct: true },
+                    { text: "(c) John is writing the letter.", correct: false },
+                    { text: "(d) John has written the letter.", correct: false }
+                ]
+            },
+            {
+                question: "Which sentence is in passive voice?",
+                options: [
+                    { text: "(a) The dog bit the man.", correct: false },
+                    { text: "(b) The man was bitten by the dog.", correct: true },
+                    { text: "(c) The man bites the dog.", correct: false },
+                    { text: "(d) The dog is biting the man.", correct: false }
+                ]
+            },
+            {
+                question: "Change the voice: They are building a new house.",
+                options: [
+                    { text: "(a) A new house is built by them.", correct: false },
+                    { text: "(b) A new house is being built by them.", correct: true },
+                    { text: "(c) A new house was built by them.", correct: false },
+                    { text: "(d) A new house has been built by them.", correct: false }
+                ]
+            },
+            {
+                question: "Identify the active voice:",
+                options: [
+                    { text: "(a) The cake was eaten by the children.", correct: false },
+                    { text: "(b) The children ate the cake.", correct: true },
+                    { text: "(c) The cake is being eaten by the children.", correct: false },
+                    { text: "(d) The cake has been eaten by the children.", correct: false }
+                ]
+            },
+            {
+                question: "Change to passive voice: She will finish the work tomorrow.",
+                options: [
+                    { text: "(a) The work will be finished by her tomorrow.", correct: true },
+                    { text: "(b) The work is finished by her tomorrow.", correct: false },
+                    { text: "(c) The work was finished by her tomorrow.", correct: false },
+                    { text: "(d) The work has been finished by her tomorrow.", correct: false }
+                ]
+            },
+            {
+                question: "Which sentence uses passive voice correctly?",
+                options: [
+                    { text: "(a) The song was sung beautiful by her.", correct: false },
+                    { text: "(b) The song was sung beautifully by her.", correct: true },
+                    { text: "(c) The song is sung by her beautiful.", correct: false },
+                    { text: "(d) The song sung by her beautifully.", correct: false }
+                ]
+            },
+            {
+                question: "Change the voice: Someone has stolen my purse.",
+                options: [
+                    { text: "(a) My purse has been stolen by someone.", correct: true },
+                    { text: "(b) My purse is stolen by someone.", correct: false },
+                    { text: "(c) My purse was stolen by someone.", correct: false },
+                    { text: "(d) My purse had been stolen by someone.", correct: false }
+                ]
+            },
+            {
+                question: "Identify the sentence with no passive voice equivalent:",
+                options: [
+                    { text: "(a) She sleeps.", correct: true },
+                    { text: "(b) She eats an apple.", correct: false },
+                    { text: "(c) She reads a book.", correct: false },
+                    { text: "(d) She writes a letter.", correct: false }
+                ]
+            },
+            
+            // Subject-Verb Agreement (10 questions)
+            {
                 question: "Choose the correct subject-verb agreement: Neither the teacher nor the students _____ present.",
                 options: [
                     { text: "(a) was", correct: false },
@@ -439,6 +730,89 @@
                     { text: "(d) is", correct: false }
                 ]
             },
+            {
+                question: "Select the correct verb: The committee _____ divided in their opinion.",
+                options: [
+                    { text: "(a) is", correct: false },
+                    { text: "(b) are", correct: true },
+                    { text: "(c) has", correct: false },
+                    { text: "(d) have", correct: false }
+                ]
+            },
+            {
+                question: "Choose the correct form: Each of the boys _____ a prize.",
+                options: [
+                    { text: "(a) get", correct: false },
+                    { text: "(b) gets", correct: true },
+                    { text: "(c) are getting", correct: false },
+                    { text: "(d) have got", correct: false }
+                ]
+            },
+            {
+                question: "Which sentence has correct subject-verb agreement?",
+                options: [
+                    { text: "(a) The news are good.", correct: false },
+                    { text: "(b) The news is good.", correct: true },
+                    { text: "(c) The news were good.", correct: false },
+                    { text: "(d) The news have been good.", correct: false }
+                ]
+            },
+            {
+                question: "Select the correct verb: Mathematics _____ my favorite subject.",
+                options: [
+                    { text: "(a) are", correct: false },
+                    { text: "(b) is", correct: true },
+                    { text: "(c) were", correct: false },
+                    { text: "(d) have been", correct: false }
+                ]
+            },
+            {
+                question: "Choose the correct form: Ten miles _____ a long distance to walk.",
+                options: [
+                    { text: "(a) are", correct: false },
+                    { text: "(b) is", correct: true },
+                    { text: "(c) were", correct: false },
+                    { text: "(d) have been", correct: false }
+                ]
+            },
+            {
+                question: "Which sentence is correct?",
+                options: [
+                    { text: "(a) The quality of the apples were good.", correct: false },
+                    { text: "(b) The quality of the apples are good.", correct: false },
+                    { text: "(c) The quality of the apples is good.", correct: true },
+                    { text: "(d) The quality of the apples have been good.", correct: false }
+                ]
+            },
+            {
+                question: "Select the correct verb: Either you or I _____ mistaken.",
+                options: [
+                    { text: "(a) is", correct: false },
+                    { text: "(b) are", correct: false },
+                    { text: "(c) am", correct: true },
+                    { text: "(d) has been", correct: false }
+                ]
+            },
+            {
+                question: "Choose the correct form: The United States _____ a powerful country.",
+                options: [
+                    { text: "(a) are", correct: false },
+                    { text: "(b) is", correct: true },
+                    { text: "(c) were", correct: false },
+                    { text: "(d) have been", correct: false }
+                ]
+            },
+            {
+                question: "Which sentence has correct agreement?",
+                options: [
+                    { text: "(a) Many a man have tried.", correct: false },
+                    { text: "(b) Many a man has tried.", correct: true },
+                    { text: "(c) Many a man are trying.", correct: false },
+                    { text: "(d) Many a man were trying.", correct: false }
+                ]
+            },
+            
+            // Articles (10 questions)
             {
                 question: "Fill in the blank with correct article: He is _____ honest man.",
                 options: [
@@ -449,6 +823,89 @@
                 ]
             },
             {
+                question: "Choose the correct article: She is _____ M.A. in English.",
+                options: [
+                    { text: "(a) a", correct: false },
+                    { text: "(b) an", correct: true },
+                    { text: "(c) the", correct: false },
+                    { text: "(d) no article", correct: false }
+                ]
+            },
+            {
+                question: "Which sentence uses articles correctly?",
+                options: [
+                    { text: "(a) The honesty is the best policy.", correct: false },
+                    { text: "(b) Honesty is a best policy.", correct: false },
+                    { text: "(c) Honesty is the best policy.", correct: true },
+                    { text: "(d) A honesty is the best policy.", correct: false }
+                ]
+            },
+            {
+                question: "Fill in the blank: _____ Ganga is a sacred river.",
+                options: [
+                    { text: "(a) A", correct: false },
+                    { text: "(b) An", correct: false },
+                    { text: "(c) The", correct: true },
+                    { text: "(d) No article", correct: false }
+                ]
+            },
+            {
+                question: "Choose the correct article: He is _____ university professor.",
+                options: [
+                    { text: "(a) a", correct: true },
+                    { text: "(b) an", correct: false },
+                    { text: "(c) the", correct: false },
+                    { text: "(d) no article", correct: false }
+                ]
+            },
+            {
+                question: "Which sentence is correct?",
+                options: [
+                    { text: "(a) I saw a one-eyed man.", correct: true },
+                    { text: "(b) I saw an one-eyed man.", correct: false },
+                    { text: "(c) I saw the one-eyed man.", correct: false },
+                    { text: "(d) I saw one-eyed man.", correct: false }
+                ]
+            },
+            {
+                question: "Fill in the blank: She plays _____ guitar very well.",
+                options: [
+                    { text: "(a) a", correct: false },
+                    { text: "(b) an", correct: false },
+                    { text: "(c) the", correct: true },
+                    { text: "(d) no article", correct: false }
+                ]
+            },
+            {
+                question: "Choose the correct article: _____ rich should help _____ poor.",
+                options: [
+                    { text: "(a) A, a", correct: false },
+                    { text: "(b) The, the", correct: true },
+                    { text: "(c) An, an", correct: false },
+                    { text: "(d) No article, no article", correct: false }
+                ]
+            },
+            {
+                question: "Which sentence uses articles correctly?",
+                options: [
+                    { text: "(a) I have a black and white dog.", correct: true },
+                    { text: "(b) I have a black and a white dog.", correct: false },
+                    { text: "(c) I have the black and white dog.", correct: false },
+                    { text: "(d) I have black and white dog.", correct: false }
+                ]
+            },
+            {
+                question: "Fill in the blank: He is _____ European.",
+                options: [
+                    { text: "(a) a", correct: true },
+                    { text: "(b) an", correct: false },
+                    { text: "(c) the", correct: false },
+                    { text: "(d) no article", correct: false }
+                ]
+            },
+            
+            // Adverbs (10 questions)
+            {
                 question: "Identify the adverb in the sentence: She sings beautifully.",
                 options: [
                     { text: "(a) She", correct: false },
@@ -457,6 +914,89 @@
                     { text: "(d) None of these", correct: false }
                 ]
             },
+            {
+                question: "Choose the correct adverb form: He works _____.",
+                options: [
+                    { text: "(a) hard", correct: true },
+                    { text: "(b) hardly", correct: false },
+                    { text: "(c) harder", correct: false },
+                    { text: "(d) hardest", correct: false }
+                ]
+            },
+            {
+                question: "Identify the type of adverb: She will come tomorrow.",
+                options: [
+                    { text: "(a) Adverb of time", correct: true },
+                    { text: "(b) Adverb of place", correct: false },
+                    { text: "(c) Adverb of manner", correct: false },
+                    { text: "(d) Adverb of frequency", correct: false }
+                ]
+            },
+            {
+                question: "Choose the correct adverb: He speaks English _____.",
+                options: [
+                    { text: "(a) fluent", correct: false },
+                    { text: "(b) fluently", correct: true },
+                    { text: "(c) fluency", correct: false },
+                    { text: "(d) fluenter", correct: false }
+                ]
+            },
+            {
+                question: "Which sentence uses an adverb of frequency?",
+                options: [
+                    { text: "(a) She often visits her grandparents.", correct: true },
+                    { text: "(b) She visits her grandparents happily.", correct: false },
+                    { text: "(c) She visits her grandparents there.", correct: false },
+                    { text: "(d) She visits her grandparents today.", correct: false }
+                ]
+            },
+            {
+                question: "Identify the adverb of degree: The coffee is too hot.",
+                options: [
+                    { text: "(a) coffee", correct: false },
+                    { text: "(b) is", correct: false },
+                    { text: "(c) too", correct: true },
+                    { text: "(d) hot", correct: false }
+                ]
+            },
+            {
+                question: "Choose the correct form: She works _____ than her brother.",
+                options: [
+                    { text: "(a) hard", correct: false },
+                    { text: "(b) harder", correct: true },
+                    { text: "(c) hardly", correct: false },
+                    { text: "(d) hardest", correct: false }
+                ]
+            },
+            {
+                question: "Which sentence has an adverb of manner?",
+                options: [
+                    { text: "(a) He runs fast.", correct: true },
+                    { text: "(b) He runs everyday.", correct: false },
+                    { text: "(c) He runs in the park.", correct: false },
+                    { text: "(d) He runs often.", correct: false }
+                ]
+            },
+            {
+                question: "Identify the adverb: Unfortunately, he lost the match.",
+                options: [
+                    { text: "(a) Unfortunately", correct: true },
+                    { text: "(b) he", correct: false },
+                    { text: "(c) lost", correct: false },
+                    { text: "(d) match", correct: false }
+                ]
+            },
+            {
+                question: "Choose the correct adverb: She _____ goes to the gym.",
+                options: [
+                    { text: "(a) usual", correct: false },
+                    { text: "(b) usually", correct: true },
+                    { text: "(c) usualy", correct: false },
+                    { text: "(d) usuality", correct: false }
+                ]
+            },
+            
+            // Error Correction (10 questions)
             {
                 question: "Correct the error: One of the boys are missing.",
                 options: [
@@ -467,6 +1007,89 @@
                 ]
             },
             {
+                question: "Identify the error: She don't like coffee.",
+                options: [
+                    { text: "(a) She", correct: false },
+                    { text: "(b) don't", correct: true },
+                    { text: "(c) like", correct: false },
+                    { text: "(d) coffee", correct: false }
+                ]
+            },
+            {
+                question: "Correct the sentence: I have many furnitures in my house.",
+                options: [
+                    { text: "(a) I have much furnitures in my house.", correct: false },
+                    { text: "(b) I have many furniture in my house.", correct: false },
+                    { text: "(c) I have much furniture in my house.", correct: true },
+                    { text: "(d) I have many pieces of furniture in my house.", correct: true }
+                ]
+            },
+            {
+                question: "Identify the error: He is better than me.",
+                options: [
+                    { text: "(a) He", correct: false },
+                    { text: "(b) is", correct: false },
+                    { text: "(c) better", correct: false },
+                    { text: "(d) me", correct: true }
+                ]
+            },
+            {
+                question: "Correct the sentence: Each of the students have a book.",
+                options: [
+                    { text: "(a) Each of the students has a book.", correct: true },
+                    { text: "(b) Each of the students having a book.", correct: false },
+                    { text: "(c) Each of the students are having a book.", correct: false },
+                    { text: "(d) Each of the students have books.", correct: false }
+                ]
+            },
+            {
+                question: "Identify the error: She is one of the best student in the class.",
+                options: [
+                    { text: "(a) She", correct: false },
+                    { text: "(b) is", correct: false },
+                    { text: "(c) best", correct: false },
+                    { text: "(d) student", correct: true }
+                ]
+            },
+            {
+                question: "Correct the sentence: I am looking forward to meet you.",
+                options: [
+                    { text: "(a) I am looking forward to meeting you.", correct: true },
+                    { text: "(b) I am looking forward to met you.", correct: false },
+                    { text: "(c) I am looking forward for meeting you.", correct: false },
+                    { text: "(d) I am looking forward for meet you.", correct: false }
+                ]
+            },
+            {
+                question: "Identify the error: The teacher as well as the students were present.",
+                options: [
+                    { text: "(a) teacher", correct: false },
+                    { text: "(b) as well as", correct: false },
+                    { text: "(c) students", correct: false },
+                    { text: "(d) were", correct: true }
+                ]
+            },
+            {
+                question: "Correct the sentence: I prefer tea than coffee.",
+                options: [
+                    { text: "(a) I prefer tea to coffee.", correct: true },
+                    { text: "(b) I prefer tea from coffee.", correct: false },
+                    { text: "(c) I prefer tea over coffee.", correct: false },
+                    { text: "(d) I prefer tea rather than coffee.", correct: true }
+                ]
+            },
+            {
+                question: "Identify the error: She is more taller than her sister.",
+                options: [
+                    { text: "(a) She", correct: false },
+                    { text: "(b) is", correct: false },
+                    { text: "(c) more", correct: true },
+                    { text: "(d) than", correct: false }
+                ]
+            },
+            
+            // Sentence Rearrangement (10 questions)
+            {
                 question: "Rearrange the words: never / he / late / is / work / for",
                 options: [
                     { text: "(a) He is never late for work.", correct: true },
@@ -475,6 +1098,89 @@
                     { text: "(d) For work he is never late.", correct: false }
                 ]
             },
+            {
+                question: "Rearrange: to / she / market / the / goes / often",
+                options: [
+                    { text: "(a) She often goes to the market.", correct: true },
+                    { text: "(b) She goes often to the market.", correct: false },
+                    { text: "(c) Often she goes to the market.", correct: false },
+                    { text: "(d) To the market she goes often.", correct: false }
+                ]
+            },
+            {
+                question: "Rearrange: beautiful / a / she / has / garden",
+                options: [
+                    { text: "(a) She has a beautiful garden.", correct: true },
+                    { text: "(b) A beautiful garden she has.", correct: false },
+                    { text: "(c) She a beautiful garden has.", correct: false },
+                    { text: "(d) Beautiful a garden she has.", correct: false }
+                ]
+            },
+            {
+                question: "Rearrange: playing / children / park / the / in / are",
+                options: [
+                    { text: "(a) Children are playing in the park.", correct: true },
+                    { text: "(b) In the park children are playing.", correct: false },
+                    { text: "(c) Playing in the park children are.", correct: false },
+                    { text: "(d) The children in park are playing.", correct: false }
+                ]
+            },
+            {
+                question: "Rearrange: book / interesting / an / I / reading / am",
+                options: [
+                    { text: "(a) I am reading an interesting book.", correct: true },
+                    { text: "(b) I am an interesting book reading.", correct: false },
+                    { text: "(c) An interesting book I am reading.", correct: false },
+                    { text: "(d) Reading I am an interesting book.", correct: false }
+                ]
+            },
+            {
+                question: "Rearrange: tomorrow / we / beach / the / to / going / are",
+                options: [
+                    { text: "(a) We are going to the beach tomorrow.", correct: true },
+                    { text: "(b) Tomorrow we are going to the beach.", correct: true },
+                    { text: "(c) We are to the beach going tomorrow.", correct: false },
+                    { text: "(d) To the beach we are going tomorrow.", correct: false }
+                ]
+            },
+            {
+                question: "Rearrange: her / she / homework / doing / is",
+                options: [
+                    { text: "(a) She is doing her homework.", correct: true },
+                    { text: "(b) She her homework is doing.", correct: false },
+                    { text: "(c) Doing her homework she is.", correct: false },
+                    { text: "(d) Her homework she is doing.", correct: false }
+                ]
+            },
+            {
+                question: "Rearrange: very / he / well / English / speaks",
+                options: [
+                    { text: "(a) He speaks English very well.", correct: true },
+                    { text: "(b) He very well speaks English.", correct: false },
+                    { text: "(c) Very well he speaks English.", correct: false },
+                    { text: "(d) English he speaks very well.", correct: false }
+                ]
+            },
+            {
+                question: "Rearrange: morning / I / walk / a / for / go / every",
+                options: [
+                    { text: "(a) I go for a walk every morning.", correct: true },
+                    { text: "(b) Every morning I go for a walk.", correct: true },
+                    { text: "(c) I for a walk go every morning.", correct: false },
+                    { text: "(d) For a walk I go every morning.", correct: false }
+                ]
+            },
+            {
+                question: "Rearrange: delicious / food / cooks / she",
+                options: [
+                    { text: "(a) She cooks delicious food.", correct: true },
+                    { text: "(b) Delicious food she cooks.", correct: false },
+                    { text: "(c) She delicious food cooks.", correct: false },
+                    { text: "(d) Cooks she delicious food.", correct: false }
+                ]
+            },
+            
+            // Vocabulary (10 questions)
             {
                 question: "Choose the synonym of 'Benevolent'",
                 options: [
@@ -485,12 +1191,176 @@
                 ]
             },
             {
+                question: "What is the antonym of 'Ancient'?",
+                options: [
+                    { text: "(a) Old", correct: false },
+                    { text: "(b) Modern", correct: true },
+                    { text: "(c) Historic", correct: false },
+                    { text: "(d) Traditional", correct: false }
+                ]
+            },
+            {
+                question: "Choose the correct meaning of 'Diligent'",
+                options: [
+                    { text: "(a) Hard-working", correct: true },
+                    { text: "(b) Lazy", correct: false },
+                    { text: "(c) Careless", correct: false },
+                    { text: "(d) Slow", correct: false }
+                ]
+            },
+            {
+                question: "What is the synonym of 'Magnificent'?",
+                options: [
+                    { text: "(a) Splendid", correct: true },
+                    { text: "(b) Ordinary", correct: false },
+                    { text: "(c) Small", correct: false },
+                    { text: "(d) Ugly", correct: false }
+                ]
+            },
+            {
+                question: "Choose the antonym of 'Brave'",
+                options: [
+                    { text: "(a) Courageous", correct: false },
+                    { text: "(b) Fearless", correct: false },
+                    { text: "(c) Cowardly", correct: true },
+                    { text: "(d) Bold", correct: false }
+                ]
+            },
+            {
+                question: "What is the meaning of 'Ponder'?",
+                options: [
+                    { text: "(a) To think deeply", correct: true },
+                    { text: "(b) To speak loudly", correct: false },
+                    { text: "(c) To walk slowly", correct: false },
+                    { text: "(d) To eat quickly", correct: false }
+                ]
+            },
+            {
+                question: "Choose the synonym of 'Weary'",
+                options: [
+                    { text: "(a) Tired", correct: true },
+                    { text: "(b) Energetic", correct: false },
+                    { text: "(c) Happy", correct: false },
+                    { text: "(d) Strong", correct: false }
+                ]
+            },
+            {
+                question: "What is the antonym of 'Generous'?",
+                options: [
+                    { text: "(a) Kind", correct: false },
+                    { text: "(b) Stingy", correct: true },
+                    { text: "(c) Helpful", correct: false },
+                    { text: "(d) Friendly", correct: false }
+                ]
+            },
+            {
+                question: "Choose the correct meaning of 'Eloquent'",
+                options: [
+                    { text: "(a) Fluent and persuasive in speaking", correct: true },
+                    { text: "(b) Unable to speak", correct: false },
+                    { text: "(c) Writing beautifully", correct: false },
+                    { text: "(d) Singing well", correct: false }
+                ]
+            },
+            {
+                question: "What is the synonym of 'Abundant'?",
+                options: [
+                    { text: "(a) Plentiful", correct: true },
+                    { text: "(b) Scarce", correct: false },
+                    { text: "(c) Limited", correct: false },
+                    { text: "(d) Small", correct: false }
+                ]
+            },
+            
+            // Idioms & Phrases (10 questions)
+            {
                 question: "What does the idiom 'Break the ice' mean?",
                 options: [
                     { text: "(a) To start a conversation", correct: true },
                     { text: "(b) To break something", correct: false },
                     { text: "(c) To fall on ice", correct: false },
                     { text: "(d) To make things difficult", correct: false }
+                ]
+            },
+            {
+                question: "What is the meaning of 'Bite the bullet'?",
+                options: [
+                    { text: "(a) To eat something hard", correct: false },
+                    { text: "(b) To face a difficult situation bravely", correct: true },
+                    { text: "(c) To bite someone", correct: false },
+                    { text: "(d) To avoid a problem", correct: false }
+                ]
+            },
+            {
+                question: "What does 'Once in a blue moon' mean?",
+                options: [
+                    { text: "(a) Very rarely", correct: true },
+                    { text: "(b) Every night", correct: false },
+                    { text: "(c) During full moon", correct: false },
+                    { text: "(d) Frequently", correct: false }
+                ]
+            },
+            {
+                question: "What is the meaning of 'Piece of cake'?",
+                options: [
+                    { text: "(a) Something delicious", correct: false },
+                    { text: "(b) Something very easy", correct: true },
+                    { text: "(c) A part of cake", correct: false },
+                    { text: "(d) Something difficult", correct: false }
+                ]
+            },
+            {
+                question: "What does 'Hit the nail on the head' mean?",
+                options: [
+                    { text: "(a) To do exactly the right thing", correct: true },
+                    { text: "(b) To make a mistake", correct: false },
+                    { text: "(c) To hit someone", correct: false },
+                    { text: "(d) To repair something", correct: false }
+                ]
+            },
+            {
+                question: "What is the meaning of 'Cost an arm and a leg'?",
+                options: [
+                    { text: "(a) Very cheap", correct: false },
+                    { text: "(b) Very expensive", correct: true },
+                    { text: "(c) Free of cost", correct: false },
+                    { text: "(d) Reasonably priced", correct: false }
+                ]
+            },
+            {
+                question: "What does 'When pigs fly' mean?",
+                options: [
+                    { text: "(a) Something that will never happen", correct: true },
+                    { text: "(b) Something that happens frequently", correct: false },
+                    { text: "(c) When animals can fly", correct: false },
+                    { text: "(d) A beautiful sight", correct: false }
+                ]
+            },
+            {
+                question: "What is the meaning of 'A blessing in disguise'?",
+                options: [
+                    { text: "(a) Something that seems bad but is actually good", correct: true },
+                    { text: "(b) A religious ceremony", correct: false },
+                    { text: "(c) A hidden treasure", correct: false },
+                    { text: "(d) A bad luck", correct: false }
+                ]
+            },
+            {
+                question: "What does 'The ball is in your court' mean?",
+                options: [
+                    { text: "(a) It's your turn to make a decision", correct: true },
+                    { text: "(b) Let's play tennis", correct: false },
+                    { text: "(c) I've made my decision", correct: false },
+                    { text: "(d) The game is over", correct: false }
+                ]
+            },
+            {
+                question: "What is the meaning of 'Spill the beans'?",
+                options: [
+                    { text: "(a) To reveal a secret", correct: true },
+                    { text: "(b) To make a mess", correct: false },
+                    { text: "(c) To cook food", correct: false },
+                    { text: "(d) To waste food", correct: false }
                 ]
             }
         ];
@@ -508,6 +1378,8 @@
         const timerElement = document.getElementById('timer');
         const screenshotBtn = document.getElementById('screenshot-btn');
         const restartBtn = document.getElementById('restart-btn');
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress-text');
 
         // Quiz state
         let currentQuestion = 0;
@@ -527,6 +1399,10 @@
             const question = questions[currentQuestion];
             questionNumber.textContent = `Question ${currentQuestion + 1}/${questions.length}`;
             questionText.textContent = question.question;
+            
+            // Update progress
+            progressBar.style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+            progressText.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
             
             optionsContainer.innerHTML = '';
             question.options.forEach((option, index) => {
